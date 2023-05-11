@@ -9,26 +9,35 @@ function Places() {
 	};
 	return (
 		<div
-			className="navbar__element"
+			className="navbar__element navbar__element--large"
 			style={{ display: "flex" }}
 			onMouseEnter={() => setIsShown(true)}
 			onMouseLeave={() => setIsShown(false)}
 		>
-			Tour
-			{isShown &&
-				Object.keys(places).map((region) => {
-					return (
-						<div
-							style={{ display: "flex", flexDirection: "column" }}
-						>
-							{region}
+			<span
+				style={{
+					width: "100%",
+					justifyContent: "center",
+					display: "flex",
+					alignItems: "center",
+				}}
+			>
+				Tour
+			</span>
+			<div className="navbar__hidden">
+				{isShown &&
+					Object.keys(places).map((region) => {
+						return (
+							<div className="navbar__hidden__places navbar__element--large">
+								<a>{region}</a>
 
-							{places[region].map((place) => {
-								return <button>{place}</button>;
-							})}
-						</div>
-					);
-				})}
+								{places[region].map((place) => {
+									return <a>{place}</a>;
+								})}
+							</div>
+						);
+					})}
+			</div>
 		</div>
 	);
 }

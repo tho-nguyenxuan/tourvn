@@ -6,16 +6,7 @@ import User from "./User";
 
 function NavBar() {
 	return (
-		<div
-			style={{
-				width: "100%",
-				display: "flex",
-				height: "80px",
-				position: "absolute",
-				background: "white",
-				justifyContent: "space-between",
-			}}
-		>
+		<div className="navbar">
 			<HomeLogo />
 			<Functions />
 			<div style={{ display: "flex" }}>

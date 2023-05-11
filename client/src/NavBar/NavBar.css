@@ -1,4 +1,83 @@
+:root {
+	--navbar__borderwidth: 0.5px;
+	--navbar__height: 80px;
+	--navbar__bgcolor: white;
+	--navbar__fontsize--big: 2.4rem;
+	--navbar__fontsize--small: 2rem;
+}
+
+.navbar {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: var(--navbar__height);
+	display: flex;
+	justify-content: space-between;
+	z-index: 1;
+	background-color: var(--navbar__bgcolor);
+	border-bottom: 1px solid black;
+	box-shadow: 0 2px 50px 2px gray;
+}
+
 .navbar__element {
 	min-width: 100px;
 	height: 100%;
+	background-color: var(--navbar__bgcolor);
+	border: none;
+	font-size: var(--navbar__fontsize--big);
+}
+
+.navbar__element--large {
+	width: 200px;
+}
+
+.navbar__element:hover {
+	cursor: pointer;
+	background-color: gray;
+}
+
+input.navbar__element:hover {
+	cursor: auto;
+	background-color: var(--navbar__bgcolor);
+}
+
+.homepage_image {
+	width: 200px;
+}
+
+.navbar__hidden {
+	position: fixed;
+	left: 0;
+	width: 100%;
+	margin-top: calc(var(--navbar__borderwidth) + var(--navbar__height));
+	display: flex;
+	background-color: var(--navbar__bgcolor);
+	justify-content: space-evenly;
+	box-shadow: 0 10px 10px 2px gray;
+}
+
+.navbar__hidden:hover {
+	cursor: context-menu;
+}
+
+.navbar__hidden__places {
+	/* height: 200px; */
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	font-size: var(--navbar__fontsize--small);
+}
+
+.navbar__hidden__places a {
+	padding: 10px;
+}
+
+.navbar__hidden__places a:first-child:hover {
+	cursor: context-menu;
+	background-color: var(--navbar__bgcolor);
+}
+
+.navbar__hidden__places a:hover {
+	cursor: pointer;
+	background-color: gray;
 }
