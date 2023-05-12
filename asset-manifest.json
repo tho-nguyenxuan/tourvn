@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/tourvn/static/css/main.df5e4185.css",
+    "main.js": "/tourvn/static/js/main.7c493692.js",
+    "static/js/787.c4e7f8f9.chunk.js": "/tourvn/static/js/787.c4e7f8f9.chunk.js",
+    "index.html": "/tourvn/index.html",
+    "main.df5e4185.css.map": "/tourvn/static/css/main.df5e4185.css.map",
+    "main.7c493692.js.map": "/tourvn/static/js/main.7c493692.js.map",
+    "787.c4e7f8f9.chunk.js.map": "/tourvn/static/js/787.c4e7f8f9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.df5e4185.css",
+    "static/js/main.7c493692.js"
+  ]
+}
