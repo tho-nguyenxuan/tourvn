@@ -24,7 +24,12 @@ function Functions() {
 			</button>
 
 			<Places />
-			<button className="navbar__element navbar__element--large">
+			<button
+				className="navbar__element navbar__element--large"
+				onClick={() => {
+					navigate("/contact");
+				}}
+			>
 				Contact
 			</button>
 		</div>
