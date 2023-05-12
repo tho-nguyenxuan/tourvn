@@ -7,6 +7,7 @@ import HomePage from "./Pages/HomePage/HomePage";
 import TourList from "./Pages/TourListPage/TourList";
 import UserPage from "./Pages/UserPage/UserPage";
 import LoginRegister from "./Pages/UserPage/LoginRegister";
+import ContactPage from "./Pages/ContactPage/ContactPage";
 
 export const AccountContext = createContext();
 
@@ -45,6 +46,7 @@ function App() {
 							element={<TourList payload={payload} />}
 						/>
 						<Route path="/user" element={<UserPage />} />
+						<Route path="/contact" element={<ContactPage />} />
 					</Route>
 					<Route path="/login" element={<LoginRegister />} />
 				</Routes>
