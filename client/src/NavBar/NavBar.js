@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Outlet } from "react-router-dom";
 import HomeLogo from "./HomeLogo";
 import Functions from "./Functions";
 import MiniSearch from "./MiniSearch";
 import User from "./User";
-import { Outlet } from "react-router-dom";
 
-function NavBar() {
+function NavBar({}) {
 	return (
 		<>
 			<div className="navbar">
