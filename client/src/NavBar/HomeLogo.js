@@ -1,8 +1,15 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function HomeLogo() {
+	const navigate = useNavigate();
 	return (
-		<button className="navbar__element navbar__element--large">
+		<button
+			className="navbar__element navbar__element--large"
+			onClick={() => {
+				navigate("/");
+			}}
+		>
 			<img
 				className=""
 				src={
