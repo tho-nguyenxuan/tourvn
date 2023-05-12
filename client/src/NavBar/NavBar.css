@@ -2,7 +2,7 @@
 	--navbar__borderwidth: 0.5px;
 	--navbar__height: 80px;
 	--navbar__bgcolor: white;
-	--navbar__fontsize--big: 2.4rem;
+	--navbar__fontsize--large: 2.4rem;
 	--navbar__fontsize--small: 2rem;
 }
 
@@ -24,7 +24,7 @@
 	height: 100%;
 	background-color: var(--navbar__bgcolor);
 	border: none;
-	font-size: var(--navbar__fontsize--big);
+	font-size: var(--navbar__fontsize--large);
 }
 
 .navbar__element--large {

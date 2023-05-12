@@ -12,12 +12,12 @@ function Functions() {
 				display: "flex",
 			}}
 		>
-			<button class="navbar__element navbar__element--large">
+			<button className="navbar__element navbar__element--large">
 				Home page
 			</button>
 
 			<Places />
-			<button class="navbar__element navbar__element--large">
+			<button className="navbar__element navbar__element--large">
 				Contact
 			</button>
 		</div>
