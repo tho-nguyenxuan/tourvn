@@ -81,3 +81,13 @@ input.navbar__element:hover {
 	cursor: pointer;
 	background-color: gray;
 }
+
+.navbar__tour__link {
+	color: black;
+	text-decoration: none;
+}
+
+.navbar__tour__link:visited {
+	color: black;
+	text-decoration: none;
+}

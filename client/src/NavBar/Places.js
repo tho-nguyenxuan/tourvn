@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Places() {
 	const [isShown, setIsShown] = useState(false);
@@ -32,7 +33,14 @@ function Places() {
 								<a>{region}</a>
 
 								{places[region].map((place) => {
-									return <a>{place}</a>;
+									return (
+										<Link
+											className="navbar__tour__link"
+											to={"/tours/" + place}
+										>
+											{place}
+										</Link>
+									);
 								})}
 							</div>
 						);
