@@ -1,13 +1,15 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import axios from "axios";
+import { APIContext } from "../../App";
 
 function LoginForm() {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
+	const api = useContext(APIContext);
 	const submitHandler = () => {
 		// console.log(username, password);
 		axios
-			.post("http://localhost:5000/login", { username, password })
+			.post(api + "/login", { username, password })
 			.then((res) => {
 				console.log(res);
 			})

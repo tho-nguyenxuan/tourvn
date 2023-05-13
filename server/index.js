@@ -1,5 +1,8 @@
 const express = require("express");
 const cors = require("cors");
+require("dotenv").config();
+
+const PORT = process.env.PORT || 3000;
 
 // const json = require('json');
 
@@ -82,6 +85,6 @@ app.post("/register", (req, res) => {
 	res.status(200).json({ msg: "Performed login" });
 });
 
-app.listen(5000, () => {
-	console.log("App listening on port 5000");
+app.listen(PORT, () => {
+	console.log("App listening on port", PORT);
 });
