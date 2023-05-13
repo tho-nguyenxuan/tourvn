@@ -10,6 +10,7 @@ import LoginRegister from "./Pages/UserPage/LoginRegister";
 import ContactPage from "./Pages/ContactPage/ContactPage";
 
 export const AccountContext = createContext();
+export const APIContext = createContext();
 
 function App() {
 	const [payload, setPayload] = useState([]);
@@ -25,7 +26,7 @@ function App() {
 
 	useEffect(() => {
 		axios
-			.get("http://localhost:5000")
+			.get("https://tourvn-server.onrender.com")
 			.then((res) => {
 				setPayload(res.data);
 			})
@@ -37,20 +38,22 @@ function App() {
 
 	return (
 		<AccountContext.Provider value={{ account, setAccount }}>
-			<BrowserRouter>
-				<Routes>
-					<Route path="" element={<NavBar />}>
-						<Route path="/" element={<HomePage />} />
-						<Route
-							path="/tours/:searchKey"
-							element={<TourList payload={payload} />}
-						/>
-						<Route path="/user" element={<UserPage />} />
-						<Route path="/contact" element={<ContactPage />} />
-					</Route>
-					<Route path="/login" element={<LoginRegister />} />
-				</Routes>
-			</BrowserRouter>
+			<APIContext.Provider value="https://tourvn-server.onrender.com">
+				<BrowserRouter>
+					<Routes>
+						<Route path="" element={<NavBar />}>
+							<Route path="/" element={<HomePage />} />
+							<Route
+								path="/tours/:searchKey"
+								element={<TourList payload={payload} />}
+							/>
+							<Route path="/user" element={<UserPage />} />
+							<Route path="/contact" element={<ContactPage />} />
+						</Route>
+						<Route path="/login" element={<LoginRegister />} />
+					</Routes>
+				</BrowserRouter>
+			</APIContext.Provider>
 		</AccountContext.Provider>
 	);
 }

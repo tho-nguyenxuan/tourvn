@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
+import { APIContext } from "../../App";
 
 function RegisterForm() {
 	const [username, setUsername] = useState("");
@@ -7,11 +8,12 @@ function RegisterForm() {
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [dob, setDob] = useState();
+	const api = useContext(APIContext);
 
 	const submitHandler = () => {
 		console.log(username, password, name, email, dob);
 		axios
-			.post("http://localhost:5000/register", {
+			.post(api + "/register", {
 				username,
 				password,
 				name,
