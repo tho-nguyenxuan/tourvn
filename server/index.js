@@ -1,20 +1,20 @@
-const express = require("express");
-const cors = require("cors");
-require("dotenv").config();
+import express from "express";
+import cors from "cors";
+import * as dotenv from "dotenv";
+dotenv.config();
 
 const PORT = process.env.PORT || 3000;
-
-// const json = require('json');
 
 const app = express();
 
 const result = [];
 
-const fs = require("fs");
-const csv = require("csv-parser");
-const morgan = require("morgan");
-fs.createReadStream("tours.csv")
-	.pipe(csv({ headers: false, skipLines: 1 }))
+import { createReadStream } from "fs";
+import csvParser from "csv-parser";
+import morgan from "morgan";
+import { TourRouter, UserRouter } from "./routers/index.js";
+createReadStream("tours.csv")
+	.pipe(csvParser({ headers: false, skipLines: 1 }))
 	.on("data", (data) => {
 		// console.log(data);
 		// result.push(Object.values(data));
@@ -37,9 +37,6 @@ fs.createReadStream("tours.csv")
 		// console.log(result);
 	});
 
-// console.log(__dirname);
-
-// app.use(express.static(__dirname));
 app.use(morgan("dev"));
 app.use(cors({ origin: "*", methods: ["GET"] }));
 app.use(express.urlencoded({ extended: true }));
@@ -65,25 +62,8 @@ const payload = [
 	},
 ];
 
-app.get("/", (req, res) => {
-	res.json(result);
-	res.end();
-});
-
-app.get("/user/:username/tours", (req, res) => {
-	res.json(result.slice(0, 5));
-	res.end();
-});
-
-app.post("/login", (req, res) => {
-	console.log(req.body);
-	res.status(200).json({ msg: "Performed login" });
-});
-
-app.post("/register", (req, res) => {
-	console.log(req.body);
-	res.status(200).json({ msg: "Performed login" });
-});
+app.use("/", TourRouter);
+app.use("/user", UserRouter);
 
 app.listen(PORT, () => {
 	console.log("App listening on port", PORT);
