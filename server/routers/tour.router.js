@@ -1,10 +1,8 @@
 import { Router } from "express";
+import { getTour } from "../controllers/tour.controller.js";
 
 const TourRouter = Router();
 
-TourRouter.get("/", (req, res) => {
-	res.json(result);
-	res.end();
-});
+TourRouter.get("/", getTour);
 
 export default TourRouter;
