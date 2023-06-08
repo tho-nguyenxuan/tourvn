@@ -25,7 +25,7 @@ function TourList({ payload }) {
 		setTours(payload);
 		if (params.date) {
 			setStartDate(params.date);
-			history.replaceState(
+			window.history.replaceState(
 				{ page: 1 },
 				"TourVN",
 				location.pathname.replace("/" + params.date, "")
