@@ -1,7 +1,7 @@
-import { Button, Image, Stack } from "react-bootstrap";
+import { Stack, Image, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-function User() {
+function Wishlist() {
 	const navigate = useNavigate();
 	return (
 		<Button
@@ -9,19 +9,19 @@ function User() {
 			type="submit"
 			onClick={(e) => {
 				e.preventDefault();
-				navigate("/user");
+				navigate("/wishlist");
 			}}
 			className="px-3 py-0 border rounded-pill m-2"
 		>
 			<Stack direction="horizontal" gap={1}>
 				<Image
-					src={process.env.PUBLIC_URL + "/Icons/user-icon.svg"}
+					src={process.env.PUBLIC_URL + "/Icons/heart-icon.svg"}
 					height={36}
 				/>
-				<p className="m-0 fs-4">Login / Signup</p>
+				<p className="m-0 fs-4">Wishlist</p>
 			</Stack>
 		</Button>
 	);
 }
 
-export default User;
+export default Wishlist;

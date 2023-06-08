@@ -1,38 +1,39 @@
-import React from "react";
-
-import "./NavBar.css";
 import Places from "./Places";
-import { useNavigate } from "react-router-dom";
+import { Navbar, Offcanvas } from "react-bootstrap";
+import MiniSearch from "./MiniSearch";
+import User from "./User";
+import Language from "./Language";
+import Wishlist from "./Wishlist";
 
-function Functions() {
+function Functions({ expand }) {
 	// let places = ["Miền Bắc", "Miền Trung", "Miền Nam"];
-	const navigate = useNavigate();
 
 	return (
-		<div
-			style={{
-				display: "flex",
-			}}
-		>
-			<button
-				className="navbar__element navbar__element--large"
-				onClick={() => {
-					navigate("/");
-				}}
-			>
-				Home page
-			</button>
+		<>
+			<Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
 
-			<Places />
-			<button
-				className="navbar__element navbar__element--large"
-				onClick={() => {
-					navigate("/contact");
-				}}
+			<Navbar.Offcanvas
+				aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
+				placement="end"
 			>
-				Contact
-			</button>
-		</div>
+				<Offcanvas.Header closeButton>
+					<Offcanvas.Title />
+				</Offcanvas.Header>
+
+				<Offcanvas.Body
+					className={`d-flex flex-column-reverse justify-content-end flex-${expand}-row align-items-${expand}-center`}
+				>
+					<Places expand={expand} />
+
+					<MiniSearch />
+
+					<Language />
+
+					<Wishlist />
+					<User />
+				</Offcanvas.Body>
+			</Navbar.Offcanvas>
+		</>
 	);
 }
 
