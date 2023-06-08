@@ -10,6 +10,7 @@ import LoginRegister from "./Pages/UserPage/LoginRegister";
 import ContactPage from "./Pages/ContactPage/ContactPage";
 import WishlistPage from "./Pages/WishlistPage/WishlistPage";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Footer from "./Footer/Footer";
 
 export const AccountContext = createContext();
 export const APIContext = createContext();
@@ -47,26 +48,25 @@ function App() {
 		<AccountContext.Provider value={{ account, setAccount }}>
 			<APIContext.Provider value={api[process.env.NODE_ENV]}>
 				<BrowserRouter>
+					<NavBar />
 					<Routes>
-						<Route path="" element={<NavBar />}>
-							<Route path="/" element={<HomePage />} />
-							<Route
-								path="/tours/:searchKey/:date"
-								element={<TourList payload={payload} />}
-							/>
-							<Route
-								path="/tours/:searchKey"
-								element={<TourList payload={payload} />}
-							/>
-							<Route path="/user" element={<UserPage />} />
-							<Route path="/contact" element={<ContactPage />} />
-							<Route
-								path="/wishlist"
-								element={<WishlistPage />}
-							/>
-						</Route>
+						{/* <Route path="" element={<NavBar />}> */}
+						<Route path="/" element={<HomePage />} />
+						<Route
+							path="/tours/:searchKey/:date"
+							element={<TourList payload={payload} />}
+						/>
+						<Route
+							path="/tours/:searchKey"
+							element={<TourList payload={payload} />}
+						/>
+						<Route path="/user" element={<UserPage />} />
+						<Route path="/contact" element={<ContactPage />} />
+						<Route path="/wishlist" element={<WishlistPage />} />
+						{/* </Route> */}
 						<Route path="/login" element={<LoginRegister />} />
 					</Routes>
+					<Footer />
 				</BrowserRouter>
 			</APIContext.Provider>
 		</AccountContext.Provider>

@@ -25,7 +25,7 @@ function NavBar() {
 					position: "relative",
 				}}
 			>
-				<Outlet />
+				{/* <Outlet /> */}
 			</div>
 		</>
 	);
