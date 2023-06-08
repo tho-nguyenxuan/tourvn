@@ -39,8 +39,8 @@ function App() {
 			.catch((err) => {
 				console.log(err);
 			});
-		setAccount();
-		console.log(process.env.NODE_ENV);
+		// setAccount();
+		// console.log(process.env.NODE_ENV);
 	}, []);
 
 	return (

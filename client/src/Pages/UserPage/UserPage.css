@@ -1,6 +1,5 @@
 .userpage {
-	width: 100%;
-	margin-top: 100px;
+	margin-top: var(--navbar__height);
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-evenly;

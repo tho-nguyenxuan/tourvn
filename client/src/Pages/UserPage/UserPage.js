@@ -1,62 +1,36 @@
-import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import "./UserPage.css";
 
-import { Navigate } from "react-router-dom";
-import ChosenTours from "./ChosenTours";
-import { AccountContext } from "../../App";
+import { useNavigate } from "react-router-dom";
+import UserInfo from "./UserInfo";
+import { Button, Stack } from "react-bootstrap";
 
-function UserPage({}) {
-	const { account } = useContext(AccountContext);
+function UserPage() {
+	const [hover, setHover] = useState(false);
+	const navigate = useNavigate();
 
-	if (!account) return <Navigate replace to="/login" />;
-	else
-		return (
-			<div className="userpage">
-				<div
-					style={{
-						width: "20%",
-						alignItems: "center",
-						display: "flex",
-						flexDirection: "column",
-					}}
-				>
-					<img
-						src={
-							process.env.PUBLIC_URL +
-							"/4105938-account-card-id-identification-identity-card-profile-user-profile_113929.png"
-						}
-						style={{ width: "100%" }}
-					/>
-					<button>Change password</button>
-				</div>
-				<div className="userpage__info">
-					<div className="col1">Ten dang nhap {account.username}</div>
-					<div className="col2">Ten {account.name}</div>
-					<div className="col1">Email {account.email}</div>
-					<div className="col2">So dien thoai {account.phone}</div>
-					<div className="col1">Ngay sinh {account.dob}</div>
-					{account.role === "admin" ? (
-						<>
-							<div className="col2">
-								Ma nhan vien {account.id}
-							</div>
-							<div className="col1">
-								Thong tin lien lac {account.contact}
-							</div>
-							<div className="col2">
-								Chuc vu {account.position}
-							</div>
-							<div className="col1">
-								Phong ban {account.department}
-							</div>
-						</>
-					) : null}
-				</div>
-				{account.role === "customer" ? (
-					<ChosenTours username={account.username} />
-				) : null}
-			</div>
-		);
+	return (
+		<Stack className="align-items-center px-5">
+			<UserInfo />
+			<Button
+				as="div"
+				className={`w-100 fs-2 py-5 ps-5 bg-white text-black d-flex border-info ${
+					hover ? "border-1" : "border-0"
+				}`}
+				onClick={() => {
+					navigate("/wishlist");
+				}}
+				onMouseEnter={() => {
+					setHover(true);
+				}}
+				onMouseLeave={() => {
+					setHover(false);
+				}}
+			>
+				Wishlist
+			</Button>
+		</Stack>
+	);
 }
 
 export default UserPage;
