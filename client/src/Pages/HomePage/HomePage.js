@@ -2,7 +2,7 @@ function HomePage() {
 	return (
 		<div
 			style={{
-				marginTop: "100px",
+				// marginTop: "100px",
 				display: "flex",
 				justifyContent: "center",
 				height: "2000px",

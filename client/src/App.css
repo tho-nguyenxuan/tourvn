@@ -40,3 +40,7 @@ html {
 		transform: rotate(360deg);
 	}
 }
+
+.no-after::after {
+	display: none !important;
+}
