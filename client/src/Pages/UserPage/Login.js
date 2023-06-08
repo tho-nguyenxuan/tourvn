@@ -9,7 +9,7 @@ function LoginForm() {
 	const submitHandler = () => {
 		// console.log(username, password);
 		axios
-			.post(api + "/login", { username, password })
+			.post(api + "/user/login", { username, password })
 			.then((res) => {
 				console.log(res);
 			})

@@ -13,7 +13,7 @@ function RegisterForm() {
 	const submitHandler = () => {
 		console.log(username, password, name, email, dob);
 		axios
-			.post(api + "/register", {
+			.post(api + "/user/register", {
 				username,
 				password,
 				name,
