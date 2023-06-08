@@ -1,5 +1,5 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
-
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { Image, Stack } from "react-bootstrap";
 import "./TourListPage.css";
 
 import TourCard from "./TourCard";
@@ -34,24 +34,31 @@ function TourList({ payload }) {
 	}, [payload]);
 
 	return (
-		<div className="tourlstpage">
-			<img
+		<Stack className="tourlstpage px-5">
+			<Image
 				src="	https://www.saigontourist.net/uploads/destination/cover-tour-tag/cover-tour-hanoi.jpg"
-				style={{ maxHeight: "500px" }}
+				style={{ height: "480px" }}
 			/>
+			<hr className="border border-2 border-black m-0 mt-5" />
+			<div className="d-flex justify-content-center m-0">
+				<p className="fs-1 p-4 my-4 fw-bold">Destination</p>
+			</div>
 			<SortAndFilter
 				tours={tours}
 				setTours={(val) => setTours(val)}
 				setSort={(val) => setSort(val)}
 				setSource={(val) => setSource(val)}
+				maxPrice={maxPrice}
 				setMaxPrice={(val) => setMaxPrice(val)}
+				minPrice={minPrice}
 				setMinPrice={(val) => setMinPrice(val)}
 				startDate={startDate}
 				setStartDate={(val) => setStartDate(val)}
 				endDate={endDate}
 				setEndDate={(val) => setEndDate(val)}
 			/>
-			<div className="tourlst">
+			<hr className="border border-2 border-black m-0" />
+			<Stack className="tourlst m-0 my-5">
 				{tours.map(
 					(tour) =>
 						searchTour(params.searchKey, tour.title) &&
@@ -59,8 +66,8 @@ function TourList({ payload }) {
 							<TourCard tour={tour} />
 						)
 				)}
-			</div>
-		</div>
+			</Stack>
+		</Stack>
 	);
 }
 

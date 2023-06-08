@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Stack } from "react-bootstrap";
+import { Image, Stack } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 function Places({ expand }) {
@@ -22,9 +22,17 @@ function Places({ expand }) {
 				setIsShown(false);
 			}}
 		>
-			<p className="m-0 fs-2 text-black position-relative top-50 start-50 translate-middle">
-				Tour
-			</p>
+			<Stack
+				direction="horizontal"
+				gap={2}
+				className="position-relative top-50 start-50 translate-middle pe-4 m-0"
+			>
+				<p className="m-0 fs-2 text-black ">Tour</p>
+				<Image
+					src={process.env.PUBLIC_URL + "/Icons/down-arrow.svg"}
+					height={12}
+				/>
+			</Stack>
 			{isShown && (
 				<Stack
 					direction="horizontal"

@@ -1,11 +1,15 @@
+import { Stack, Dropdown, Form, Button, Image } from "react-bootstrap";
 import { sortFunctions } from "../../utils";
+import { useState } from "react";
 
 function SortAndFilter({
 	tours,
 	setTours,
 	setSort,
 	setSource,
+	maxPrice,
 	setMaxPrice,
+	minPrice,
 	setMinPrice,
 	startDate,
 	setStartDate,
@@ -20,91 +24,116 @@ function SortAndFilter({
 		"Quang Ninh",
 		"Can Tho",
 	];
-	return (
-		<div className="tourlst__sortfilter">
-			{/* sort */}
-			<div className="tourlst__sort">
-				<select
-					onChange={(e) => {
-						switch (e.target.value) {
-							case "pa":
-								setSort("price +");
-								tours.sort(sortFunctions.priceAscending);
-								break;
-							case "pd":
-								setSort("price -");
-								tours.sort(sortFunctions.priceDescending);
-								break;
-							case "ta":
-								setSort("time +");
-								tours.sort(sortFunctions.timeAscending);
-								break;
-							case "td":
-								setSort("time -");
-								tours.sort(sortFunctions.timeDescending);
-								break;
 
-							default:
-								break;
-						}
-						setTours([...tours]);
-					}}
-				>
-					<option value="">none</option>
-					<option value="pa">price +</option>
-					<option value="pd">price -</option>
-					<option value="ta">time +</option>
-					<option value="td">time -</option>
-				</select>
-			</div>
-			<div className="tourlst__filter">
-				<form>
-					<select
-						onChange={(e) => {
-							setSource(e.target.value);
-						}}
+	const [sortFunc, setSortFunc] = useState("Not Specified");
+	const step = 500000;
+
+	return (
+		<Stack
+			direction="horizontal"
+			className="tourlst__sortfilter px-4 d-flex justify-content-between align-items-center w-100 align-self-center"
+		>
+			{/* sort */}
+			<Stack direction="horizontal" className="border rounded-4 p-2 h-75">
+				<p className="m-0 fs-3 p-2">Sort</p>
+				<div className="vr mx-2" />
+
+				<Dropdown className="m-2">
+					<Dropdown.Toggle
+						variant="light"
+						className="no-after px-3 py-0 border rounded-pill fs-4"
 					>
-						<option value="">None</option>
-						{provinces.map((province) => (
-							<option value={province}>{province}</option>
-						))}
-					</select>
-					<input
-						type="number"
-						min={0}
-						placeholder="Max price"
-						onChange={(e) => {
-							setMaxPrice(e.target.value);
-						}}
-					/>
-					<input
-						type="number"
-						min={0}
-						placeholder="Min price"
-						onChange={(e) => {
-							setMinPrice(e.target.value);
-						}}
-					/>
-					<input
-						type="date"
-						value={startDate}
-						min={new Date().toISOString().slice(0, 10)}
-						onChange={(e) => {
-							setStartDate(e.target.value);
-							console.log(e.target.value);
-						}}
-					/>
-					<input
-						type="date"
-						value={endDate}
-						min={new Date().toISOString().slice(0, 10)}
-						onChange={(e) => {
-							setEndDate(e.target.value);
-						}}
-					/>
-				</form>
-			</div>
-		</div>
+						{sortFunc}
+					</Dropdown.Toggle>
+					<Dropdown.Menu>
+						{Object.keys(sortFunctions).map((func) => {
+							return (
+								<Dropdown.Item>
+									<div
+										className="fs-4"
+										onClick={() => {
+											tours.sort(sortFunctions[func]);
+											setSortFunc(func);
+											setTours([...tours]);
+										}}
+									>
+										{func}
+									</div>
+								</Dropdown.Item>
+							);
+						})}
+					</Dropdown.Menu>
+				</Dropdown>
+			</Stack>
+
+			<Stack
+				direction="horizontal"
+				className="tourlst__filter h-75 border rounded-4"
+				style={{ width: "1000px" }}
+			>
+				<Form className="d-flex w-100 justify-content-center">
+					<Stack direction="horizontal" gap={3} className="p-1 mx-2">
+						<Form.Label className="fs-3">Filter</Form.Label>
+
+						<div className="vr" />
+
+						<Form.Control
+							type="date"
+							size="lg"
+							className="border border-0 fs-4"
+						/>
+
+						<div className="vr" />
+
+						<Form.Label className="fs-4 m-0">Length</Form.Label>
+						<Form.Select className="fs-4 m-0">
+							<option value="0" selected>
+								Select your option
+							</option>
+							<option value="1">Trong ngày</option>
+							<option value="2">2 ngày 1 đêm</option>
+							<option value="3">3 ngày 2 đêm</option>
+							<option value="4">4 ngày 3 đêm</option>
+							<option value="5">Khác</option>
+						</Form.Select>
+
+						<div className="vr" />
+
+						<Form.Label className="fs-4 m-0">Price</Form.Label>
+						<Form.Label
+							className="fs-4 m-0"
+							style={{ width: "100px" }}
+						>
+							{minPrice}
+						</Form.Label>
+						<Form.Range
+							min={0}
+							max={maxPrice - step}
+							step={step}
+							value={minPrice}
+							onChange={(e) => {
+								setMinPrice(e.target.value);
+							}}
+						/>
+						<Form.Range
+							min={minPrice + step}
+							max={100000000}
+							step={step}
+							value={maxPrice}
+							onChange={(e) => {
+								setMaxPrice(e.target.value);
+							}}
+						/>
+						<Form.Label
+							className="fs-4 m-0"
+							style={{ width: "100px" }}
+						>
+							{maxPrice}
+						</Form.Label>
+					</Stack>
+				</Form>
+			</Stack>
+		</Stack>
 	);
 }
 
