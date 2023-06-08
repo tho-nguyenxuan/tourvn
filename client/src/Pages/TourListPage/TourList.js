@@ -3,7 +3,7 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import "./TourListPage.css";
 
 import TourCard from "./TourCard";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import SortAndFilter from "./SortAndFilter";
 import { searchTour } from "../../utils";
 function TourList({ payload }) {
@@ -19,9 +19,18 @@ function TourList({ payload }) {
 	const [minPrice, setMinPrice] = useState(0);
 	const [startDate, setStartDate] = useState();
 	const [endDate, setEndDate] = useState();
+	const location = useLocation();
 
 	useEffect(() => {
 		setTours(payload);
+		if (params.date) {
+			setStartDate(params.date);
+			history.replaceState(
+				{ page: 1 },
+				"TourVN",
+				location.pathname.replace("/" + params.date, "")
+			);
+		}
 	}, [payload]);
 
 	return (
