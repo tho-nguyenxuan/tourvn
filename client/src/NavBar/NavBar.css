@@ -1,22 +1,13 @@
 :root {
 	--navbar__borderwidth: 0.5px;
 	--navbar__height: 80px;
-	--navbar__bgcolor: white;
-	--navbar__fontsize--large: 2.4rem;
-	--navbar__fontsize--small: 2rem;
 }
 
 .navbar {
-	position: fixed;
-	top: 0;
-	width: 100%;
 	height: var(--navbar__height);
-	display: flex;
-	justify-content: space-between;
 	z-index: 1;
 	background-color: var(--navbar__bgcolor);
-	border-bottom: 1px solid black;
-	box-shadow: 0 2px 50px 2px gray;
+	border-bottom: var(--navbar__borderwidth) solid black;
 }
 
 .navbar__element {

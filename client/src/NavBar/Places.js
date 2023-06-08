@@ -1,51 +1,60 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { Stack } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-function Places() {
-	const [isShown, setIsShown] = useState(false);
+function Places({ expand }) {
 	let places = {
 		"Miền Bắc": ["Hà Nội", "Hải Phòng", "Hạ Long", "Bắc Ninh", "Phú Thọ"],
 		"Miền Trung": ["Huế", "Đà Lạt", "Nha Trang", "Hội An", "Phan Thiết"],
 		"Miền Nam": ["Phú Quốc", "Côn Đảo", "Vũng Tàu", "Bến Tre", "Cà Mau"],
 	};
+
+	const [isShown, setIsShown] = useState(false);
+
 	return (
 		<div
-			className="navbar__element navbar__element--large"
-			style={{ display: "flex" }}
-			onMouseEnter={() => setIsShown(true)}
-			onMouseLeave={() => setIsShown(false)}
+			className="mx-2 pe-4 ps-4 z-2"
+			style={{ height: "var(--navbar__height)" }}
+			onMouseEnter={() => {
+				setIsShown(true);
+			}}
+			onMouseLeave={() => {
+				setIsShown(false);
+			}}
 		>
-			<span
-				style={{
-					width: "100%",
-					justifyContent: "center",
-					display: "flex",
-					alignItems: "center",
-				}}
-			>
+			<p className="m-0 fs-2 text-black position-relative top-50 start-50 translate-middle">
 				Tour
-			</span>
-			<div className="navbar__hidden">
-				{isShown &&
-					Object.keys(places).map((region) => {
+			</p>
+			{isShown && (
+				<Stack
+					direction="horizontal"
+					className="position-fixed border translate-middle-x p-0 bg-white"
+					style={{
+						top: "var(--navbar__height)",
+						left: "50%",
+						width: "800px",
+					}}
+				>
+					{Object.keys(places).map((region) => {
 						return (
-							<div className="navbar__hidden__places navbar__element--large">
-								<a>{region}</a>
-
+							<Stack className="ms-auto me-auto p-4">
+								<p className="p-3 fs-3">{region}</p>
+								<hr />
 								{places[region].map((place) => {
 									return (
 										<Link
-											className="navbar__tour__link"
-											to={"/tours/" + place}
+											to={`/tours/${place}`}
+											className="p-3 text-decoration-none text-black fs-4"
 										>
 											{place}
 										</Link>
 									);
 								})}
-							</div>
+							</Stack>
 						);
 					})}
-			</div>
+				</Stack>
+			)}
 		</div>
 	);
 }

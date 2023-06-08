@@ -1,24 +1,19 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import { NavbarBrand, Image } from "react-bootstrap";
 
 function HomeLogo() {
-	const navigate = useNavigate();
 	return (
-		<button
-			className="navbar__element navbar__element--large"
-			onClick={() => {
-				navigate("/");
-			}}
-		>
-			<img
+		<NavbarBrand href="/">
+			<Image
 				className=""
-				src={
-					process.env.PUBLIC_URL +
-					"/vacation_bag_backpack_trip_outdoor_icon_228038.png"
-				}
-				style={{ height: "100%" }}
+				src={process.env.PUBLIC_URL + "/Icons/tour-logo.svg"}
+				height={48}
 			/>
-		</button>
+			<Image
+				className=""
+				src={process.env.PUBLIC_URL + "/Icons/brand.svg"}
+				height={64}
+			/>
+		</NavbarBrand>
 	);
 }
 
