@@ -51,6 +51,10 @@ function App() {
 						<Route path="" element={<NavBar />}>
 							<Route path="/" element={<HomePage />} />
 							<Route
+								path="/tours/:searchKey/:date"
+								element={<TourList payload={payload} />}
+							/>
+							<Route
 								path="/tours/:searchKey"
 								element={<TourList payload={payload} />}
 							/>

@@ -1,15 +1,16 @@
+import { Stack } from "react-bootstrap";
+import Slideshow from "./Slideshow";
+import Slogan from "./Slogan";
+import SearchBar from "./SearchBar";
+
 function HomePage() {
 	return (
-		<div
-			style={{
-				// marginTop: "100px",
-				display: "flex",
-				justifyContent: "center",
-				height: "2000px",
-			}}
-		>
-			<h1>Home Page</h1>
-		</div>
+		<Stack>
+			<Slideshow />
+			<Slogan />
+			<SearchBar />
+			<div style={{ height: "500px" }}></div>
+		</Stack>
 	);
 }
 
