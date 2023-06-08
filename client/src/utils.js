@@ -23,16 +23,16 @@ function searchTour(searchStr, title) {
 }
 
 const sortFunctions = {
-	priceAscending: (a, b) => a.price - b.price,
-	priceDescending: (a, b) => b.price - a.price,
-	timeAscending: (a, b) => {
+	"Price Ascending": (a, b) => a.price - b.price,
+	"Price Descending": (a, b) => b.price - a.price,
+	"Time Ascending": (a, b) => {
 		const [ad, am, ay] = a.start.split("/");
 		const [bd, bm, by] = b.start.split("/");
 		const adate = new Date(+ay, +am - 1, +ad);
 		const bdate = new Date(+by, +bm - 1, +bd);
 		return adate - bdate;
 	},
-	timeDescending: (a, b) => {
+	"Time Descending": (a, b) => {
 		const [ad, am, ay] = a.start.split("/");
 		const [bd, bm, by] = b.start.split("/");
 		const adate = new Date(+ay, +am - 1, +ad);

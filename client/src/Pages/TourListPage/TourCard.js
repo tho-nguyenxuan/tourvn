@@ -1,30 +1,42 @@
 import { Link } from "react-router-dom";
+import { Button, Image, Stack } from "react-bootstrap";
 
 function TourCard({ tour }) {
 	return (
-		<a
-			href={"https://www.saigontourist.net" + tour.linkUrl}
-			target="_blank"
-			className="tourcard"
+		<Stack
+			direction="horizontal"
+			className="my-4 border border-3 rounded-5 border-black w-75 align-self-center"
 		>
-			<div>
-				<img src={"https://www.saigontourist.net" + tour.imgUrl} />
-			</div>
-			<div style={{ marginLeft: "50px", padding: "10px" }}>
-				Title: {tour.title}
-				<br />
-				Start: {tour.start}
-				<br />
-				Time: {tour.time}
-				<br />
-				Price: {tour.price}
-				<br />
-				Children Price: {tour.childrenPrice}
-				<br />
-				Description: {tour.description}
-				<br />
-			</div>
-		</a>
+			<Image
+				className="border-end border-1 border-black"
+				src={process.env.PUBLIC_URL + "/Icons/location-icon.svg"}
+				width={400}
+				height={300}
+			/>
+			<Stack
+				style={{ width: "480px" }}
+				className="py-4 px-5 border-end border-1 border-black"
+			>
+				<p className="fs-2 fw-bold">Title: {tour.title}</p>
+				<hr className="border-2" />
+				<p className="fs-4">Length: {tour.time}</p>
+				<p className="fs-4">Price: {tour.price}</p>
+				<p className="fs-4">Description: {tour.description}</p>
+			</Stack>
+			<Stack className="p-4">
+				<p>Start</p>
+				<p>Start: {tour.start}</p>
+				<Button className="mt-auto">
+					<Link
+						to={tour.linkUrl}
+						target="_blank"
+						className="p-2 text-decoration-none"
+					>
+						<p className="m-0 fs-2 text-white">View Tour</p>
+					</Link>
+				</Button>
+			</Stack>
+		</Stack>
 	);
 }
 
