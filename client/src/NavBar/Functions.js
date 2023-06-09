@@ -30,6 +30,7 @@ function Functions({ expand }) {
 					<Language />
 
 					<Wishlist />
+
 					<User />
 				</Offcanvas.Body>
 			</Navbar.Offcanvas>

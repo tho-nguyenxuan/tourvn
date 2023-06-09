@@ -1,8 +1,12 @@
+import { useContext } from "react";
 import { Stack, Image, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { LanguageContext } from "../App";
+import { dictionary } from "../utils";
 
 function Wishlist() {
 	const navigate = useNavigate();
+	const { language } = useContext(LanguageContext);
 	return (
 		<Button
 			variant="light"
@@ -18,7 +22,7 @@ function Wishlist() {
 					src={process.env.PUBLIC_URL + "/Icons/heart-icon.svg"}
 					height={36}
 				/>
-				<p className="m-0 fs-4">Wishlist</p>
+				<p className="m-0 fs-4">{dictionary[language].wishlist}</p>
 			</Stack>
 		</Button>
 	);

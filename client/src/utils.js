@@ -63,17 +63,28 @@ function searchTour(searchStr, title) {
 	return title.includes(searchStr);
 }
 
+function getDuration(time) {
+	const [res, ...arr] = time.split(" ");
+	return res;
+}
+
+function convertDate(date) {
+	const [day, month, year] = date.split("/");
+	return `${year}-${month}-${day}`;
+}
+
 const sortFunctions = {
-	"Price Ascending": (a, b) => a.price - b.price,
-	"Price Descending": (a, b) => b.price - a.price,
-	"Time Ascending": (a, b) => {
+	byId: (a, b) => (a.id > b.id ? 1 : b.id > a.id ? -1 : 0),
+	priceAscending: (a, b) => a.price - b.price,
+	priceDescending: (a, b) => b.price - a.price,
+	dateAscending: (a, b) => {
 		const [ad, am, ay] = a.start.split("/");
 		const [bd, bm, by] = b.start.split("/");
 		const adate = new Date(+ay, +am - 1, +ad);
 		const bdate = new Date(+by, +bm - 1, +bd);
 		return adate - bdate;
 	},
-	"Time Descending": (a, b) => {
+	dateDescending: (a, b) => {
 		const [ad, am, ay] = a.start.split("/");
 		const [bd, bm, by] = b.start.split("/");
 		const adate = new Date(+ay, +am - 1, +ad);
@@ -82,4 +93,80 @@ const sortFunctions = {
 	},
 };
 
-export { searchTour, sortFunctions, ScrollButton };
+const dictionary = {
+	eng: {
+		search: "Search",
+		wishlist: "Wishlist",
+		login: "Log In",
+		signup: "Sign Up",
+		sort: "Sort",
+		notSpecified: "Not Specified",
+		priceAscending: "Price Ascending",
+		priceDescending: "Price Descending",
+		dateAscending: "Date Ascending",
+		dateDescending: "Date Desscending",
+		filter: "Filter",
+		departureDate: "Departure Date",
+		duration: "Duration",
+		price: "Price",
+		oneDay: "One Day",
+		twoDays: "Two Days",
+		threeDays: "Three Days",
+		fourDays: "Four Days",
+		others: "Others",
+		option: "Select Your Option",
+		view: "View",
+		destination: "Destination",
+		account: "Account",
+		username: "Username",
+		password: "Password",
+		changeToRegister: "Don't Have An Account? Sign Up",
+		changeToLogin: "Have An Account? Log In",
+		name: "Name",
+		confirmPassword: "Confirm Password",
+		dob: "Date Of Birth",
+		description: "Description",
+	},
+	vie: {
+		search: "Tìm Kiếm",
+		wishlist: "Yêu Thích",
+		login: "Đăng Nhập",
+		signup: "Đăng Ký",
+		sort: "Sắp Xếp",
+		notSpecified: "Không Chọn",
+		priceAscending: "Giá Tăng Dần",
+		priceDescending: "Giá GIảm Dần",
+		dateAscending: "Ngày Khởi Hành Tăng Dần",
+		dateDescending: "Ngày Khởi Hành Giảm Dần",
+		filter: "Lọc",
+		departureDate: "Ngày Khởi Hành",
+		duration: "Thời Gian",
+		price: "Giá",
+		oneDay: "1 Ngày",
+		twoDays: "2 Ngày",
+		threeDays: "3 Ngày",
+		fourDays: "4 Ngày",
+		others: "Khác",
+		option: "Lựa Chọn",
+		view: "Xem",
+		destination: "Điểm đến",
+		account: "Tài Khoản",
+		username: "Tên Đăng Nhập",
+		password: "Mật Khẩu",
+		changeToRegister: "Chưa Có Tài Khoản? Đăng Ký",
+		changeToLogin: "Đã Có Tài Khoản? Đăng Nhập",
+		name: "Tên",
+		confirmPassword: "Xác Nhận Mật Khẩu",
+		dob: "Ngày Sinh",
+		description: "Mô Tả",
+	},
+};
+
+export {
+	searchTour,
+	sortFunctions,
+	ScrollButton,
+	dictionary,
+	getDuration,
+	convertDate,
+};

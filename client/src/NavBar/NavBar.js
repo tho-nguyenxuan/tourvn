@@ -1,4 +1,3 @@
-import { Outlet } from "react-router-dom";
 import { Navbar, Stack } from "react-bootstrap";
 import HomeLogo from "./HomeLogo";
 import Functions from "./Functions";
@@ -24,9 +23,7 @@ function NavBar() {
 					marginTop: "var(--navbar__height)",
 					position: "relative",
 				}}
-			>
-				{/* <Outlet /> */}
-			</div>
+			></div>
 		</>
 	);
 }

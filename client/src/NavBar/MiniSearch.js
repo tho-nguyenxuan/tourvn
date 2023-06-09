@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Button, Image, Stack } from "react-bootstrap";
+import { LanguageContext } from "../App";
+import { dictionary } from "../utils";
 
 function MiniSearch() {
 	const [searchStr, setSearchStr] = useState("");
 	const navigate = useNavigate();
+	const { language } = useContext(LanguageContext);
 
 	const submitHandler = (e) => {
 		e.preventDefault();
@@ -19,7 +22,7 @@ function MiniSearch() {
 			>
 				<Form.Control
 					type="search"
-					placeholder="Search"
+					placeholder={dictionary[language].destination}
 					value={searchStr}
 					onChange={(e) => {
 						setSearchStr(e.target.value);

@@ -5,26 +5,23 @@ import "./TourListPage.css";
 import TourCard from "./TourCard";
 import { useLocation, useParams } from "react-router-dom";
 import SortAndFilter from "./SortAndFilter";
-import { searchTour } from "../../utils";
+import { convertDate, getDuration, searchTour } from "../../utils";
 function TourList({ payload }) {
 	let params = useParams();
 	const [tours, setTours] = useState([]);
 
-	// sort
-	const [sort, setSort] = useState("");
-
-	// filter
-	const [source, setSource] = useState("");
-	const [maxPrice, setMaxPrice] = useState(50000000);
 	const [minPrice, setMinPrice] = useState(0);
-	const [startDate, setStartDate] = useState();
-	const [endDate, setEndDate] = useState();
+	const [maxPrice, setMaxPrice] = useState(20_000_000);
+	const [departureDate, setDepartureDate] = useState(
+		new Date().toISOString().substring(0, 10)
+	);
+	const [duration, setDuration] = useState("0");
 	const location = useLocation();
 
 	useEffect(() => {
 		setTours(payload);
 		if (params.date) {
-			setStartDate(params.date);
+			setDepartureDate(params.date);
 			window.history.replaceState(
 				{ page: 1 },
 				"TourVN",
@@ -39,7 +36,7 @@ function TourList({ payload }) {
 				src="	https://www.saigontourist.net/uploads/destination/cover-tour-tag/cover-tour-hanoi.jpg"
 				style={{ height: "480px" }}
 			/>
-			{/* <hr className="border border-2 border-black m-0 mt-5" /> */}
+
 			<Stack
 				className="align-items-center my-5 px-5"
 				style={{ backgroundColor: "#eff7ff" }}
@@ -47,25 +44,26 @@ function TourList({ payload }) {
 				<p className="fs-1 p-4 my-4 fw-bold">Destination</p>
 				<SortAndFilter
 					tours={tours}
-					setTours={(val) => setTours(val)}
-					setSort={(val) => setSort(val)}
-					setSource={(val) => setSource(val)}
-					maxPrice={maxPrice}
-					setMaxPrice={(val) => setMaxPrice(val)}
-					minPrice={minPrice}
-					setMinPrice={(val) => setMinPrice(val)}
-					startDate={startDate}
-					setStartDate={(val) => setStartDate(val)}
-					endDate={endDate}
-					setEndDate={(val) => setEndDate(val)}
+					setTours={setTours}
+					setMinPrice={setMinPrice}
+					setMaxPrice={setMaxPrice}
+					setDepartureDate={setDepartureDate}
+					setDuration={setDuration}
 				/>
 			</Stack>
-			{/* <hr className="border border-2 border-black m-0" /> */}
+
 			<Stack className="tourlst m-0 my-5">
 				{tours.map(
 					(tour) =>
 						searchTour(params.searchKey, tour.title) &&
-						searchTour(source, tour.source) && (
+						(duration == "0"
+							? true
+							: duration == "5"
+							? getDuration(tour.time) >= duration
+							: getDuration(tour.time) == duration) &&
+						convertDate(tour.start) >= departureDate &&
+						minPrice <= parseInt(tour.price) &&
+						maxPrice >= parseInt(tour.price) && (
 							<TourCard tour={tour} />
 						)
 				)}
