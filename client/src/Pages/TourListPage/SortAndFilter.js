@@ -1,8 +1,6 @@
-import { Stack, Dropdown, Form, Button, Image } from "react-bootstrap";
+import { Stack, Dropdown, Form } from "react-bootstrap";
 import { sortFunctions } from "../../utils";
 import { useState } from "react";
-
-import "rc-slider/assets/index.css";
 
 import ReactSlider from "react-slider";
 
