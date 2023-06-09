@@ -1,5 +1,6 @@
 import { createReadStream } from "fs";
 import csvParser from "csv-parser";
+import db from "../db.js";
 
 const result = [];
 
