@@ -7,6 +7,11 @@ import { useMiddlewares, useRouters } from "./config.js";
 dotenv.config();
 
 const PORT = process.env.PORT || 3000;
+// const DB_HOST = process.env.DATABASE_HOST || "jro.h.filess.io";
+// const DB_DB = process.env.DATABASE_DB || "DatabaseSystemsHCMUT_rocketdue";
+// const DB_PORT = process.env.DATABASE_PORT || 3307;
+// const DB_USER = process.env.DATABASE_USER || "DatabaseSystemsHCMUT_rocketdue";
+// const DB_PASS = process.env.DATABASE_PASS || "c4b96502d80064bec3ad38de196c70071dde72c8";
 
 const app = express();
 
