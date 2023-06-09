@@ -4,15 +4,6 @@ import { useState } from "react";
 
 import ReactSlider from "react-slider";
 
-function PriceRange() {
-	return (
-		<>
-			<Slider />
-			<Range />
-		</>
-	);
-}
-
 function SortAndFilter({
 	tours,
 	setTours,
