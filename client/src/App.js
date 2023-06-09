@@ -11,6 +11,7 @@ import ContactPage from "./Pages/ContactPage/ContactPage";
 import WishlistPage from "./Pages/WishlistPage/WishlistPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Footer from "./Footer/Footer";
+import { ScrollButton } from "./utils";
 
 export const AccountContext = createContext();
 export const APIContext = createContext();
@@ -62,10 +63,16 @@ function App() {
 						/>
 						<Route path="/user" element={<UserPage />} />
 						<Route path="/contact" element={<ContactPage />} />
-						<Route path="/wishlist" element={<WishlistPage />} />
+						<Route
+							path="/wishlist"
+							element={
+								<WishlistPage username={account.username} />
+							}
+						/>
 						{/* </Route> */}
 						<Route path="/login" element={<LoginRegister />} />
 					</Routes>
+					<ScrollButton />
 					<Footer />
 				</BrowserRouter>
 			</APIContext.Provider>

@@ -5,11 +5,11 @@ function TourCard({ tour }) {
 	return (
 		<Stack
 			direction="horizontal"
-			className="my-4 border border-3 rounded-5 border-black w-75 align-self-center"
+			className="my-4 border border-1 rounded-5 w-75 align-self-center overflow-hidden"
 		>
 			<Image
 				className="border-end border-1 border-black"
-				src={process.env.PUBLIC_URL + "/Icons/location-icon.svg"}
+				src={"https://saigontourist.net" + tour.imgUrl}
 				width={400}
 				height={300}
 			/>
@@ -28,7 +28,7 @@ function TourCard({ tour }) {
 				<p>Start: {tour.start}</p>
 				<Button className="mt-auto">
 					<Link
-						to={tour.linkUrl}
+						to={"https://saigontourist.net" + tour.linkUrl}
 						target="_blank"
 						className="p-2 text-decoration-none"
 					>

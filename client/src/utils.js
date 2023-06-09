@@ -1,5 +1,46 @@
 // import re
 
+import { useState } from "react";
+import { Image } from "react-bootstrap";
+
+const ScrollButton = () => {
+	const [visible, setVisible] = useState(false);
+
+	const toggleVisible = () => {
+		const scrolled = document.documentElement.scrollTop;
+		if (scrolled > 300) {
+			setVisible(true);
+		} else if (scrolled <= 300) {
+			setVisible(false);
+		}
+	};
+
+	const scrollToTop = () => {
+		window.scrollTo({
+			top: 0,
+			behavior: "smooth",
+			/* you can also use 'auto' behaviour
+         in place of 'smooth' */
+		});
+	};
+
+	window.addEventListener("scroll", toggleVisible);
+
+	return (
+		<div
+			className="position-fixed s-50 z-1"
+			style={{ bottom: "40px", right: "40px" }}
+		>
+			<Image
+				src={process.env.PUBLIC_URL + "/Icons/up-arrow.svg"}
+				onClick={scrollToTop}
+				style={{ display: visible ? "inline" : "none" }}
+				height={36}
+			/>
+		</div>
+	);
+};
+
 function convertToEngLower(str) {
 	str = str.toLowerCase();
 	str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
@@ -41,4 +82,4 @@ const sortFunctions = {
 	},
 };
 
-export { searchTour, sortFunctions };
+export { searchTour, sortFunctions, ScrollButton };
