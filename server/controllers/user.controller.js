@@ -1,3 +1,5 @@
+import crypto from "crypto";
+
 const payload = [
 	{
 		source: "Cần Thơ",
@@ -18,19 +20,76 @@ const payload = [
 	},
 ];
 
+const accounts = {
+	thovodanh: {
+		hash: "1c5c2cdf2d97687345db44765b59a8e9cdea1f567164ed89a64a656a5b845727",
+		info: {
+			username: "thovodanh",
+			role: "customer",
+			name: "Nguyen Xuan Tho",
+			email: "tho.nguyenxuantho573@hcmut.edu.vn",
+			phone: "0123456789",
+			dob: "07-05-2003",
+		},
+	},
+};
+
 const getUserTours = async (req, res) => {
 	res.json(payload);
 	res.end();
 };
 
 const postLogin = async (req, res) => {
-	console.log(req.body);
-	res.status(200).json({ msg: "Performed login" });
+	// console.log(req.body);
+	var hash = crypto
+		.createHash("sha256")
+		.update(req.body.password)
+		.digest("hex");
+
+	if (
+		req.body.username in accounts &&
+		hash == accounts[req.body.username].hash
+	)
+		res.status(200).json({
+			msg: "Performed login",
+			user: {
+				username: "thovodanh",
+				role: "customer",
+				name: "Nguyen Xuan Tho",
+				email: "tho.nguyenxuantho573@hcmut.edu.vn",
+				phone: "0123456789",
+				dob: "07-05-2003",
+			},
+		});
+	else res.status(401).json({ msg: "Authentication Failed" });
 };
 
 const postRegister = async (req, res) => {
 	console.log(req.body);
-	res.status(200).json({ msg: "Performed register" });
+	if (req.body.username in accounts)
+		res.status(401).json({ msg: "Account Taken" });
+	else {
+		var hash = crypto
+			.createHash("sha256")
+			.update(req.body.password)
+			.digest("hex");
+
+		accounts[req.body.username] = {
+			hash: hash,
+			info: {
+				username: req.body.username,
+				role: "customer",
+				name: req.body.name,
+				email: req.body.email,
+				phone: req.body.phone,
+				dob: req.body.dob,
+			},
+		};
+		res.status(200).json({
+			msg: "Performed register",
+			user: accounts[req.body.username].info,
+		});
+	}
 };
 
 export { getUserTours, postLogin, postRegister };
