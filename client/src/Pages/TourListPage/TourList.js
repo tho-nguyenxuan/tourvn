@@ -15,7 +15,7 @@ function TourList({ payload }) {
 
 	// filter
 	const [source, setSource] = useState("");
-	const [maxPrice, setMaxPrice] = useState(Infinity);
+	const [maxPrice, setMaxPrice] = useState(50000000);
 	const [minPrice, setMinPrice] = useState(0);
 	const [startDate, setStartDate] = useState();
 	const [endDate, setEndDate] = useState();
@@ -34,30 +34,33 @@ function TourList({ payload }) {
 	}, [payload]);
 
 	return (
-		<Stack className="tourlstpage px-5">
+		<Stack className="tourlstpage">
 			<Image
 				src="	https://www.saigontourist.net/uploads/destination/cover-tour-tag/cover-tour-hanoi.jpg"
 				style={{ height: "480px" }}
 			/>
-			<hr className="border border-2 border-black m-0 mt-5" />
-			<div className="d-flex justify-content-center m-0">
+			{/* <hr className="border border-2 border-black m-0 mt-5" /> */}
+			<Stack
+				className="align-items-center my-5 px-5"
+				style={{ backgroundColor: "#eff7ff" }}
+			>
 				<p className="fs-1 p-4 my-4 fw-bold">Destination</p>
-			</div>
-			<SortAndFilter
-				tours={tours}
-				setTours={(val) => setTours(val)}
-				setSort={(val) => setSort(val)}
-				setSource={(val) => setSource(val)}
-				maxPrice={maxPrice}
-				setMaxPrice={(val) => setMaxPrice(val)}
-				minPrice={minPrice}
-				setMinPrice={(val) => setMinPrice(val)}
-				startDate={startDate}
-				setStartDate={(val) => setStartDate(val)}
-				endDate={endDate}
-				setEndDate={(val) => setEndDate(val)}
-			/>
-			<hr className="border border-2 border-black m-0" />
+				<SortAndFilter
+					tours={tours}
+					setTours={(val) => setTours(val)}
+					setSort={(val) => setSort(val)}
+					setSource={(val) => setSource(val)}
+					maxPrice={maxPrice}
+					setMaxPrice={(val) => setMaxPrice(val)}
+					minPrice={minPrice}
+					setMinPrice={(val) => setMinPrice(val)}
+					startDate={startDate}
+					setStartDate={(val) => setStartDate(val)}
+					endDate={endDate}
+					setEndDate={(val) => setEndDate(val)}
+				/>
+			</Stack>
+			{/* <hr className="border border-2 border-black m-0" /> */}
 			<Stack className="tourlst m-0 my-5">
 				{tours.map(
 					(tour) =>
