@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useContext } from "react";
 import { Stack, Image, Dropdown } from "react-bootstrap";
+import { LanguageContext } from "../App";
 
 function Lan({ lan, src, setLanguage }) {
 	return (
@@ -27,11 +28,11 @@ function Lan({ lan, src, setLanguage }) {
 
 function Language() {
 	const languages = {
-		VIE: "/Icons/vie-flag.svg",
-		ENG: "/Icons/eng-flag.svg",
+		vie: "/Icons/vie-flag.svg",
+		eng: "/Icons/eng-flag.svg",
 	};
 
-	const [language, setLanguage] = useState("VIE");
+	const { language, setLanguage } = useContext(LanguageContext);
 
 	return (
 		<Dropdown className="m-2 z-1">
