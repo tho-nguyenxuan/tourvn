@@ -9,7 +9,9 @@ const payload = [
 		end: "05/06/2023",
 		time: "5 ngày 4 đêm",
 		title: "Hà Nội - Hà Giang - Cao Bằng - Lạng Sơn - Khởi hành từ Cần Thơ",
-		imgUrl: "/uploads/destination/TrongNuoc/Caobang-BacCan/Bangioc-Caobang-Vietnam_36528265.jpg",
+		imgUrl:
+			"https://saigontourist.net" +
+			"/uploads/destination/TrongNuoc/Caobang-BacCan/Bangioc-Caobang-Vietnam_36528265.jpg",
 		description:
 			"Thời gian : 5 ngày 4 đêm\nPhương tiện : Hàng không Vietnam Airlines\n- Dự kiến khởi hành: Thứ 4 cách tuần\n- Chụp ảnh lưu niệm tại...",
 		program:
@@ -17,6 +19,7 @@ const payload = [
 		price: 9990000,
 		childrenPrice: 6700000,
 		linkUrl:
+			"https://saigontourist.net" +
 			"/vi/tour-trong-nuoc/4702/ha-noi-ha-giang-cao-bang-lang-son-khoi-hanh-tu-can-tho",
 	},
 ];
