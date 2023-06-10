@@ -1,11 +1,14 @@
 import { Button, Modal, Form } from "react-bootstrap";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { dictionary } from "../../utils";
+import { LanguageContext } from "../../App";
 
 function ChangePass() {
 	const [show, setShow] = useState(false);
 	const [password, setPassword] = useState("");
 	const [newPassword, setNewPassword] = useState("");
 	const [reNewPassword, setReNewPassword] = useState("");
+	const { language } = useContext(LanguageContext);
 
 	const handleClose = () => setShow(false);
 
@@ -18,7 +21,7 @@ function ChangePass() {
 				className="border border-black fs-4"
 				onClick={handleShow}
 			>
-				Change password
+				{dictionary[language].changePassword}
 			</Button>
 
 			<Modal

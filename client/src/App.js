@@ -20,10 +20,9 @@ export const LanguageContext = createContext();
 
 function App() {
 	const [payload, setPayload] = useState([]);
-	const [language, setLanguage] = useState("vie");
+	const [language, setLanguage] = useState("eng");
 	const [account, setAccount] = useState({
 		username: "thovodanh",
-		password: "some password",
 		role: "customer",
 		name: "Nguyen Xuan Tho",
 		email: "tho.nguyenxuantho573@hcmut.edu.vn",
@@ -45,7 +44,6 @@ function App() {
 				console.log(err);
 			});
 		setAccount();
-		// console.log(process.env.NODE_ENV);
 	}, []);
 
 	return (

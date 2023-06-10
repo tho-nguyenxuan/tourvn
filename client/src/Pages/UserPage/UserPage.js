@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./UserPage.css";
 
 import { useNavigate } from "react-router-dom";
 import UserInfo from "./UserInfo";
 import { Button, Stack } from "react-bootstrap";
+import { dictionary } from "../../utils";
+import { LanguageContext } from "../../App";
 
 function UserPage() {
 	const [hover, setHover] = useState(false);
 	const navigate = useNavigate();
+	const { language } = useContext(LanguageContext);
 
 	return (
 		<Stack className="align-items-center px-5">
@@ -27,7 +30,7 @@ function UserPage() {
 					setHover(false);
 				}}
 			>
-				Wishlist
+				{dictionary[language].wishlist}
 			</Button>
 		</Stack>
 	);
