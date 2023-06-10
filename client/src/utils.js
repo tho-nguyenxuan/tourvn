@@ -126,6 +126,9 @@ const dictionary = {
 		confirmPassword: "Confirm Password",
 		dob: "Date Of Birth",
 		description: "Description",
+		pno: "Phone Number",
+		logout: "Log Out",
+		changePassword: "Change Password",
 	},
 	vie: {
 		search: "Tìm Kiếm",
@@ -159,6 +162,9 @@ const dictionary = {
 		confirmPassword: "Xác Nhận Mật Khẩu",
 		dob: "Ngày Sinh",
 		description: "Mô Tả",
+		pno: "Số Điện Thoại",
+		logout: "Đăng Xuất",
+		changePassword: "Đổi Mật Khẩu",
 	},
 };
 

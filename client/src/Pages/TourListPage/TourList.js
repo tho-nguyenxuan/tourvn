@@ -1,4 +1,10 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import {
+	useContext,
+	useEffect,
+	useLayoutEffect,
+	useRef,
+	useState,
+} from "react";
 import { Image, Stack } from "react-bootstrap";
 import "./TourListPage.css";
 
@@ -6,6 +12,9 @@ import TourCard from "./TourCard";
 import { useLocation, useParams } from "react-router-dom";
 import SortAndFilter from "./SortAndFilter";
 import { convertDate, getDuration, searchTour } from "../../utils";
+import { dictionary } from "../../utils";
+import { LanguageContext } from "../../App";
+
 function TourList({ payload }) {
 	let params = useParams();
 	const [tours, setTours] = useState([]);
@@ -17,6 +26,7 @@ function TourList({ payload }) {
 	);
 	const [duration, setDuration] = useState("0");
 	const location = useLocation();
+	const { language } = useContext(LanguageContext);
 
 	useEffect(() => {
 		setTours(payload);
@@ -41,7 +51,9 @@ function TourList({ payload }) {
 				className="align-items-center my-5 px-5"
 				style={{ backgroundColor: "#eff7ff" }}
 			>
-				<p className="fs-1 p-4 my-4 fw-bold">Destination</p>
+				<p className="fs-1 p-4 my-4 fw-bold">
+					{`${dictionary[language].destination}: ${params.searchKey}`}
+				</p>
 				<SortAndFilter
 					tours={tours}
 					setTours={setTours}

@@ -1,22 +1,25 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import axios from "axios";
-import { APIContext, LanguageContext } from "../../App";
+import { APIContext, AccountContext, LanguageContext } from "../../App";
 import { Form, Button } from "react-bootstrap";
 import { dictionary } from "../../utils";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function LoginForm() {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
+	const navigate = useNavigate();
 	const api = useContext(APIContext);
 	const { language } = useContext(LanguageContext);
+	const { account, setAccount } = useContext(AccountContext);
+
+	if (account) navigate("/");
 	const submitHandler = (e) => {
 		e.preventDefault();
-		// console.log(username, password);
 		axios
 			.post(api + "/user/login", { username, password })
 			.then((res) => {
-				console.log(res);
+				setAccount(res.data.user);
 			})
 			.catch((err) => {
 				console.log(err);

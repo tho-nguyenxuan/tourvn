@@ -1,9 +1,9 @@
 import { useContext, useState } from "react";
 import axios from "axios";
-import { APIContext, LanguageContext } from "../../App";
+import { APIContext, AccountContext, LanguageContext } from "../../App";
 import { Form, Button } from "react-bootstrap";
 import { dictionary } from "../../utils";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function RegisterForm() {
 	const [name, setName] = useState("");
@@ -11,13 +11,17 @@ function RegisterForm() {
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [email, setEmail] = useState("");
+	const [pno, setPno] = useState("");
 	const [dob, setDob] = useState();
 	const api = useContext(APIContext);
 	const { language } = useContext(LanguageContext);
+	const { account, setAccount } = useContext(AccountContext);
+	const navigate = useNavigate();
+
+	if (account) navigate("/");
 
 	const submitHandler = (e) => {
 		e.preventDefault();
-		// console.log(username, password, name, email, dob);
 		if (confirmPassword == password)
 			axios
 				.post(api + "/user/register", {
@@ -26,9 +30,11 @@ function RegisterForm() {
 					name,
 					email,
 					dob,
+					phone: pno,
 				})
 				.then((res) => {
-					console.log(res);
+					// console.log(res);
+					setAccount(res.data.user);
 				})
 				.catch((err) => {
 					console.log(err);
@@ -38,7 +44,7 @@ function RegisterForm() {
 	return (
 		<div style={{ height: "600px" }} className="position-relative">
 			<Form
-				className="w-50 position-absolute top-50 start-50 translate-middle border border-black rounded-5 fs-3 p-5"
+				className="w-50 position-absolute top-50 start-50 translate-middle border border-black rounded-5 fs-3 py-3 px-5"
 				onSubmit={submitHandler}
 			>
 				<Form.Group className="mb-2">
@@ -99,6 +105,17 @@ function RegisterForm() {
 						className="fs-4"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
+					/>
+				</Form.Group>
+
+				<Form.Group className="mb-2">
+					<Form.Label>{dictionary[language].pno}</Form.Label>
+					<Form.Control
+						type="text"
+						placeholder={dictionary[language].pno}
+						className="fs-4"
+						value={pno}
+						onChange={(e) => setPno(e.target.value)}
 					/>
 				</Form.Group>
 
