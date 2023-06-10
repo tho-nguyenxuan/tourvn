@@ -1,4 +1,5 @@
 import crypto from "crypto";
+import db from "../db.js";
 
 const payload = [
 	{
@@ -40,56 +41,114 @@ const getUserTours = async (req, res) => {
 };
 
 const postLogin = async (req, res) => {
-	// console.log(req.body);
 	var hash = crypto
 		.createHash("sha256")
 		.update(req.body.password)
 		.digest("hex");
 
-	if (
-		req.body.username in accounts &&
-		hash == accounts[req.body.username].hash
-	)
-		res.status(200).json({
-			msg: "Performed login",
-			user: {
-				username: "thovodanh",
-				role: "customer",
-				name: "Nguyen Xuan Tho",
-				email: "tho.nguyenxuantho573@hcmut.edu.vn",
-				phone: "0123456789",
-				dob: "07-05-2003",
-			},
-		});
-	else res.status(401).json({ msg: "Authentication Failed" });
+	db.query(
+		`SELECT LayMatKhau('${req.body.username}') AS MK`,
+		function (error, results, fields) {
+			if (error) console.log(error);
+
+			if (results[0].MK == null)
+				res.status(401).json({ msg: "No account" });
+			else if (results[0].MK != hash)
+				res.status(401).json({ msg: "Wrong password" });
+			else
+				db.query(
+					`CALL ThongTinTaiKhoan('${req.body.username}')`,
+					function (error, results, fields) {
+						if (error) console.log(error);
+
+						const data = results[0][0];
+						const trueDate = data.NgaySinh;
+						trueDate.setDate(trueDate.getDate() + 1);
+
+						res.status(200).json({
+							msg: "Performed login",
+							user: {
+								username: data.TenDN,
+								role: data.Loai,
+								name: data.Ten,
+								email: data.Email,
+								phone: data.SDT,
+								dob: trueDate
+									.toISOString()
+									.substring(0, 10)
+									.split("-")
+									.reverse()
+									.join("/"),
+							},
+						});
+					}
+				);
+		}
+	);
 };
 
 const postRegister = async (req, res) => {
-	console.log(req.body);
-	if (req.body.username in accounts)
-		res.status(401).json({ msg: "Account Taken" });
-	else {
-		var hash = crypto
-			.createHash("sha256")
-			.update(req.body.password)
-			.digest("hex");
+	var hash = crypto
+		.createHash("sha256")
+		.update(req.body.password)
+		.digest("hex");
 
-		accounts[req.body.username] = {
-			hash: hash,
-			info: {
-				username: req.body.username,
-				role: "customer",
-				name: req.body.name,
-				email: req.body.email,
-				phone: req.body.phone,
-				dob: req.body.dob,
-			},
-		};
-		res.status(200).json({
-			msg: "Performed register",
-			user: accounts[req.body.username].info,
-		});
-	}
+	db.query(
+		`SELECT CheckExistUser('${req.body.username}') as Existed`,
+		function (error, results, fields) {
+			if (error) console.log(error);
+			if (results[0].Existed)
+				res.status(401).json({ msg: "Account Existed" });
+			else
+				db.query(
+					`CALL InsertTaiKhoan('${req.body.username}', '${req.body.phone}', '${hash}', '${req.body.email}', '${req.body.name}', 'Khach hang', '${req.body.dob}')`,
+					function (error, results, fields) {
+						if (error) console.log(error);
+
+						res.status(200).json({
+							msg: "Performed register",
+							user: {
+								username: req.body.username,
+								role: "Khach hang",
+								name: req.body.name,
+								email: req.body.email,
+								phone: req.body.phone,
+								dob: req.body.dob
+									.split("-")
+									.reverse()
+									.join("/"),
+							},
+						});
+					}
+				);
+		}
+	);
+
+	// console.log(req.body);
+	// if (req.body.username in accounts)
+	// 	res.status(401).json({ msg: "Account Taken" });
+	// else {
+	// 	var hash = crypto
+	// 		.createHash("sha256")
+	// 		.update(req.body.password)
+	// 		.digest("hex");
+
+	// 	accounts[req.body.username] = {
+	// 		hash: hash,
+	// 		info: {
+	// 			username: req.body.username,
+	// 			role: "customer",
+	// 			name: req.body.name,
+	// 			email: req.body.email,
+	// 			phone: req.body.phone,
+	// 			dob: req.body.dob,
+	// 		},
+	// 	};
+	// res.status(200).json({
+	// 	msg: "Performed register",
+	// 	// user: accounts[req.body.username].info,
+	// });
+	// }
 };
 
 export { getUserTours, postLogin, postRegister };

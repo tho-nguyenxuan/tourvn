@@ -1,5 +1,7 @@
 import { createReadStream } from "fs";
 import csvParser from "csv-parser";
+import { config } from "dotenv";
+config();
 
 const result = [];
 
@@ -29,16 +31,15 @@ createReadStream("tours.csv")
 
 export { result };
 
-import mysql from "mysql";
+import {createConnection} from "mysql";
 
-const DB_HOST =
-	process.env.DATABASE_HOST || "containers-us-west-114.railway.app";
-const DB_DB = process.env.DATABASE_DB || "railway";
-const DB_PORT = process.env.DATABASE_PORT || 6781;
-const DB_USER = process.env.DATABASE_USER || "root";
-const DB_PASS = process.env.DATABASE_PASS || "O4DlxAGvznJ7RwV2ttI2";
+const DB_HOST = process.env.DATABASE_HOST;
+const DB_DB = process.env.DATABASE_DB;
+const DB_PORT = process.env.DATABASE_PORT;
+const DB_USER = process.env.DATABASE_USER;
+const DB_PASS = process.env.DATABASE_PASS;
 
-var db = mysql.createConnection({
+var db = createConnection({
 	host: DB_HOST,
 	user: DB_USER,
 	password: DB_PASS,
