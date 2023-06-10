@@ -4,6 +4,7 @@ import morgan from "morgan";
 import * as dotenv from "dotenv";
 import { TourRouter, UserRouter } from "./routers/index.js";
 import { useMiddlewares, useRouters } from "./config.js";
+import db from "./db.js";
 dotenv.config();
 
 const PORT = process.env.PORT || 3000;
@@ -22,6 +23,13 @@ useMiddlewares(app, [
 	express.json(),
 ]);
 
+db.connect(function (err) {
+	if (err) {
+		console.log("Error connecting:");
+		console.log(err.stack);
+	}
+	console.log("Connected successfully to database.");
+});
 useRouters(app, {
 	"/": TourRouter,
 	"/user": UserRouter,

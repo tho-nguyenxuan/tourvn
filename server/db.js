@@ -1,3 +1,34 @@
+import { createReadStream } from "fs";
+import csvParser from "csv-parser";
+
+const result = [];
+
+createReadStream("tours.csv")
+	.pipe(csvParser({ headers: false, skipLines: 1 }))
+	.on("data", (data) => {
+		// console.log(data);
+		// result.push(Object.values(data));
+		result.push({
+			// source: data[0],
+			// destination: data[1],
+			start: data[2],
+			// end: data[3],
+			time: data[4],
+			title: data[5],
+			imgUrl: "https://saigontourist.net" + data[6],
+			description: data[7],
+			// program: data[8],
+			price: data[9],
+			// childrenPrice: data[10],
+			linkUrl: "https://saigontourist.net" + data[11],
+		});
+	})
+	.on("end", () => {
+		// console.log(result);
+	});
+
+export { result };
+
 import mysql from "mysql";
 
 const DB_HOST =
@@ -13,14 +44,6 @@ var db = mysql.createConnection({
 	password: DB_PASS,
 	database: DB_DB,
 	port: DB_PORT,
-});
-
-db.connect(function (err) {
-	if (err) {
-		console.log("Error connecting:");
-		console.log(err.stack);
-	}
-	console.log("Connected successfully to database.");
 });
 
 export default db;

@@ -13,7 +13,7 @@ function TourCard({ tour }) {
 		>
 			<Image
 				className="border-end border-1 border-black"
-				src={"https://saigontourist.net" + tour.imgUrl}
+				src={tour.imgUrl}
 				width={360}
 				height={280}
 			/>
@@ -27,9 +27,11 @@ function TourCard({ tour }) {
 				<p className="fs-4">{`${dictionary[language].price}: ${parseInt(
 					tour.price
 				).toLocaleString()}`}</p>
-				<p className="fs-4">
-					{`${dictionary[language].description}: ${tour.description}`}
-				</p>
+				{tour.description && (
+					<p className="fs-4">
+						{`${dictionary[language].description}: ${tour.description}`}
+					</p>
+				)}
 			</Stack>
 			<Stack className="px-4 py-5">
 				<p className="fs-2 text-decoration-underline">
@@ -38,7 +40,7 @@ function TourCard({ tour }) {
 				<p className="fs-3">{tour.start}</p>
 				<Button className="mt-auto rounded-4">
 					<Link
-						to={"https://saigontourist.net" + tour.linkUrl}
+						to={tour.linkUrl}
 						target="_blank"
 						className="p-2 text-decoration-none"
 					>
