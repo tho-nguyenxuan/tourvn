@@ -1,4 +1,4 @@
-import db, { result } from "../db.js";
+import db from "../db.js";
 
 const getTour = async (req, res) => {
 	var temp = [];
@@ -25,13 +25,8 @@ const getTour = async (req, res) => {
 				linkUrl: data.DuongLink,
 			});
 		}
-		// res.send(results[0]);
-		// console.log(results[0][0].ThoiGianDi.toISOString().substring(0, 10));
 		res.status(200).json(temp);
-		// console.log(temp);
 	});
-	// res.json(result);
-	// res.end();
 };
 
 export { getTour };
